@@ -9,8 +9,11 @@ Scheduled Query Rule within Log Analytics that will discover when the same remot
 
 DeviceLogonEvents
 | where TimeGenerated >= ago(5h)
+
 | where ActionType == "LogonFailed"
+
 | summarize NumberofFailures = count() by RemoteIP, ActionType, DeviceName
+
 | where NumberofFailures >= 10
 
 
@@ -29,7 +32,9 @@ The alert was triggered on 8 different devices by 10 different IP Addresses.
 To see if any of the IP addresses successfully logged in, I used this query: 
 
 DeviceLogonEvents
+
 | where RemoteIP in("63.250.59.176", "72.241.84.72", "137.184.37.114", "15.204.52.64", "80.64.19.158", "36.134.36.217", "92.63.197.9", "185.156.73.173", "185.156.73.169", "45.136.68.84")
+
 | where ActionType != "LogonFailed"
 
 <img width="1324" height="718" alt="Pasted Graphic 3" src="https://github.com/user-attachments/assets/3b3f2007-ebae-485d-9126-d1a832a5342f" />
