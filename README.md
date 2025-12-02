@@ -8,6 +8,7 @@ I created an alert rule
 Scheduled Query Rule within Log Analytics that will discover when the same remote IP address has failed to log in to the same local host (Azure VM) 10 times or more within the last 5 hours.
 
 DeviceLogonEvents
+
 | where TimeGenerated >= ago(5h)
 
 | where ActionType == "LogonFailed"
